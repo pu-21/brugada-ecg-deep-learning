@@ -48,7 +48,7 @@ from metrics import compute_classification_metrics, find_best_f1_threshold, save
 
 CSV_PATH = PROJECT / "目前没用的" / "model_ready_ecg_waveforms.csv"
 INDEX_PATH = PROJECT / "ecg_waveforms_index.csv"
-OUTDIR = Path(__file__).resolve().parent / "outputs"
+OUTDIR = Path(__file__).resolve().parent / "outputs_focalfix"
 MODELS = ["cnn", "resnet", "seresnet", "lstm", "tcn"]
 METRIC_KEYS = ["auroc", "auprc", "precision", "recall", "specificity", "f1", "brier_score"]
 
@@ -260,7 +260,7 @@ def main():
     save_json(summaries, OUTDIR / "cv_all_models_summary.json")
 
     # ---- console comparison vs main experiment (76-positive primary analysis) ----
-    main_dir = PROJECT / "模型" / "outputs" / "dl_cv_tcn"
+    main_dir = PROJECT / "模型" / "outputs" / "dl_cv_focalfix"
     print("\n=== Sensitivity (69 confirmed only, N=356) vs Main (76 incl. atypical, N=363) ===", flush=True)
     print(f"{'model':10s} {'sens AUROC':>14s} {'main AUROC':>14s} {'sens F1':>13s} {'main F1':>13s}", flush=True)
     for name in MODELS:
