@@ -29,7 +29,7 @@ model.eval()
 
 # Load feature extractor from the published training result if available.
 # If not, use the randomly initialized backbone only for visualization fallback.
-summary_path = BASE / "模型" / "outputs" / "dl_cv_seresnet_attn_retry" / "seresnet_cv_summary.json"
+summary_path = BASE / "模型" / "outputs" / "dl_cv_focalfix" / "seresnet_cv_summary.json"
 if summary_path.exists():
     with open(summary_path, "r", encoding="utf-8") as f:
         summary = json.load(f)
@@ -38,6 +38,7 @@ else:
 
 # Try to use the first fold checkpoint if present; otherwise, fall back to the current model.
 ckpt_candidates = [
+    BASE / "模型" / "outputs" / "dl_cv_focalfix" / "seresnet_fold1_best.pt",
     BASE / "模型" / "outputs" / "seresnet_ckpt_only" / "seresnet_fold1_best.pt",
     BASE / "模型" / "outputs" / "dl_cv_seresnet_ckpt" / "seresnet_fold1_best.pt",
     BASE / "模型" / "outputs" / "dl_cv_seresnet_attn_retry" / "seresnet_fold1_best.pt",
