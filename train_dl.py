@@ -274,7 +274,8 @@ class FocalLoss(nn.Module):
         focal = (1 - pt).pow(self.gamma)
         loss = focal * bce_loss
         if self.alpha is not None:
-            alpha_t = torch.where(targets == 1, self.alpha[0], self.alpha[1])
+            # alpha = [weight_negative, weight_positive]; positive class gets alpha[1]
+            alpha_t = torch.where(targets == 1, self.alpha[1], self.alpha[0])
             loss = alpha_t * loss
         if self.reduction == "mean":
             return loss.mean()
